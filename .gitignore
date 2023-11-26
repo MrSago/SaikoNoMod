@@ -1,4 +1,7 @@
 .vs
 SaikoNoMod/bin
 SaikoNoMod/obj
-build_and_run.bat
+all.bat
+build.bat
+copy.bat
+run.bat

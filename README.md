@@ -1,3 +1,2 @@
 
-# MelonLoader SaikoNoMod for Saiko no sutoka
-
+# MelonLoader mod for Saiko no sutoka

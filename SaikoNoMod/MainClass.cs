@@ -1,13 +1,12 @@
 using MelonLoader;
 
-
 namespace SaikoNoMod
 {
     public class MainClass : MelonMod
     {
         private const string MAIN_MENU_SCENE_NAME = "MainMenu";
         private const string MAIN_LEVEL_SCENE_NAME = "LevelNew";
-        private const string GAME_MANAGER_OBJECT_NAME = "GAMEMANAGER";
+        private const string GAME_MANAGER_NAME = "GAMEMANAGER";
         private Il2Cpp.HFPS_GameManager? _gameManager;
 
         public override void OnUpdate()
@@ -40,10 +39,10 @@ namespace SaikoNoMod
         {
             try
             {
-                _gameManager = UnityEngine.GameObject.Find(GAME_MANAGER_OBJECT_NAME)?.GetComponent<Il2Cpp.HFPS_GameManager>();
+                _gameManager = UnityEngine.GameObject.Find(GAME_MANAGER_NAME)?.GetComponent<Il2Cpp.HFPS_GameManager>();
                 if (_gameManager == null)
                 {
-                    MelonLogger.Error($"Can't get ${nameof(Il2Cpp.HFPS_GameManager)} component of GameObject ${GAME_MANAGER_OBJECT_NAME}!");
+                    MelonLogger.Error($"Can't get ${nameof(Il2Cpp.HFPS_GameManager)} component of UnityEngine.GameObject ${GAME_MANAGER_NAME}!");
                     return;
                 }
                 MelonLogger.Msg("GameManager found!");

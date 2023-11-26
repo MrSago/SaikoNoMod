@@ -1,7 +1,6 @@
 using HarmonyLib;
 using MelonLoader;
 
-
 namespace SaikoNoMod
 {
     [HarmonyPatch(typeof(UnityEngine.UI.Toggle), "OnPointerClick", new Type[] { typeof(UnityEngine.EventSystems.PointerEventData) })]

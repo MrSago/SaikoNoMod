@@ -1,7 +1,6 @@
 using HarmonyLib;
 using MelonLoader;
 
-
 namespace SaikoNoMod
 {
     [HarmonyPatch(typeof(UnityEngine.UI.Toggle), "OnPointerClick", new Type[] { typeof(UnityEngine.EventSystems.PointerEventData) })]
@@ -20,7 +19,7 @@ namespace SaikoNoMod
                 UnityEngine.UI.Button? playButton = playButtonObject?.GetComponent<UnityEngine.UI.Button>();
                 if (playButton == null)
                 {
-                    MelonLogger.Error($"[NightmareUnlocker] Can't get UnityEngine.UI.Button component of GameObject ${PLAY_BUTTON_NAME}");
+                    MelonLogger.Error($"[NightmareUnlocker] Can't get UnityEngine.UI.Button component of UnityEngine.GameObject ${PLAY_BUTTON_NAME}");
                     return;
                 }
                 playButton.interactable = true;
@@ -29,7 +28,7 @@ namespace SaikoNoMod
                 UnityEngine.UI.Text? playText = playTextObject?.GetComponent<UnityEngine.UI.Text>();
                 if (playText == null)
                 {
-                    MelonLogger.Error($"[NightmareUnlocker] Can't get UnityEngine.UI.Text child(0) component of ${PLAY_BUTTON_NAME}");
+                    MelonLogger.Error($"[NightmareUnlocker] Can't get UnityEngine.UI.Text child(0) component of UnityEngine.GameObject ${PLAY_BUTTON_NAME}");
                     return;
                 }
                 playText.text = "Play";

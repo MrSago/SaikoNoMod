@@ -3,8 +3,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 
-[assembly: MelonInfo(typeof(SaikoNoMod.MainClass), SaikoNoMod.Properties.BuildInfo.Name, SaikoNoMod.Properties.BuildInfo.Version,
+[assembly: MelonInfo(typeof(SaikoNoMod.SaikoNoModCore), SaikoNoMod.Properties.BuildInfo.Name, SaikoNoMod.Properties.BuildInfo.Version,
     SaikoNoMod.Properties.BuildInfo.Author, SaikoNoMod.Properties.BuildInfo.DownloadLink)]
+[assembly: MelonOptionalDependencies("UniverseLib")]
 [assembly: MelonGame("Habupain", "Saiko no sutoka")]
 [assembly: MelonColor(255, 33, 164, 176)]
 [assembly: MelonAuthorColor(255, 196, 21, 169)]

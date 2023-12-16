@@ -1,10 +1,10 @@
 using HarmonyLib;
 using MelonLoader;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace SaikoNoMod.Mods
+namespace SaikoNoMod.Patches
 {
     [HarmonyPatch(typeof(Toggle), "OnPointerClick", new Type[] { typeof(PointerEventData) })]
     public static class NightmareUnlocker
@@ -19,7 +19,10 @@ namespace SaikoNoMod.Mods
                 Button? playButton = playButtonObject?.GetComponent<Button>();
                 if (playButton == null)
                 {
-                    MelonLogger.Error($"[NightmareUnlocker] Can't get UnityEngine.UI.Button component of UnityEngine.GameObject ${ObjectNames.PlayButton}");
+                    MelonLogger.Error(
+                        $"[{nameof(NightmareUnlocker)}] Can't find {nameof(Button)} " +
+                        $"component of {nameof(GameObject)} {ObjectNames.PlayButton}"
+                    );
                     return;
                 }
                 playButton.interactable = true;
@@ -28,12 +31,15 @@ namespace SaikoNoMod.Mods
                 Text? playText = playTextObject?.GetComponent<Text>();
                 if (playText == null)
                 {
-                    MelonLogger.Error($"[NightmareUnlocker] Can't get UnityEngine.UI.Text child(0) component of UnityEngine.GameObject ${ObjectNames.PlayButton}");
+                    MelonLogger.Error(
+                        $"[{nameof(NightmareUnlocker)}] Can't get {nameof(Text)} " +
+                        $"child(0) component of {nameof(GameObject)} {ObjectNames.PlayButton}"
+                    );
                     return;
                 }
                 playText.text = "Play";
 
-                MelonLogger.Msg("[NightmareUnlocker] Play button for Nightmare mode successfully unlocked!");
+                MelonLogger.Msg($"[{nameof(NightmareUnlocker)}] Play button for Nightmare mode successfully unlocked!");
             }
             catch (Exception ex)
             {

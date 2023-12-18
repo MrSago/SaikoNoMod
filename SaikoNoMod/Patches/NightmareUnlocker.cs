@@ -1,5 +1,4 @@
 using HarmonyLib;
-using MelonLoader;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,15 +12,15 @@ namespace SaikoNoMod.Patches
         {
             try
             {
-                if (__instance.name != ObjectNames.NightmareUnlockerTrigger) { return; }
+                if (__instance.name != ObjectNames.NIGHTMARE_UNLOCKER_TRIGGER) { return; }
 
-                GameObject? playButtonObject = GameObject.Find(ObjectNames.PlayButton);
+                GameObject? playButtonObject = GameObject.Find(ObjectNames.PLAY_BUTTON);
                 Button? playButton = playButtonObject?.GetComponent<Button>();
                 if (playButton == null)
                 {
-                    MelonLogger.Error(
+                    SaikoNoModCore.LogWarning(
                         $"[{nameof(NightmareUnlocker)}] Can't find {nameof(Button)} " +
-                        $"component of {nameof(GameObject)} {ObjectNames.PlayButton}"
+                        $"component of {nameof(GameObject)} {ObjectNames.PLAY_BUTTON}"
                     );
                     return;
                 }
@@ -31,19 +30,19 @@ namespace SaikoNoMod.Patches
                 Text? playText = playTextObject?.GetComponent<Text>();
                 if (playText == null)
                 {
-                    MelonLogger.Error(
+                    SaikoNoModCore.LogWarning(
                         $"[{nameof(NightmareUnlocker)}] Can't get {nameof(Text)} " +
-                        $"child(0) component of {nameof(GameObject)} {ObjectNames.PlayButton}"
+                        $"child(0) component of {nameof(GameObject)} {ObjectNames.PLAY_BUTTON}"
                     );
                     return;
                 }
                 playText.text = "Play";
 
-                MelonLogger.Msg($"[{nameof(NightmareUnlocker)}] Play button for Nightmare mode successfully unlocked!");
+                SaikoNoModCore.Log($"[{nameof(NightmareUnlocker)}] Play button for Nightmare mode successfully unlocked!");
             }
             catch (Exception ex)
             {
-                MelonLogger.Error(ex);
+                SaikoNoModCore.LogError(ex);
             }
         }
     }

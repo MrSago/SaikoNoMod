@@ -1,57 +1,115 @@
-using Il2Cpp;
-using MelonLoader;
+
+using SaikoNoMod.Loader;
 using UnityEngine;
+using SaikoNoMod.Properties;
 using UniverseLib;
-using UniverseLib.Input;
+using UniverseLib.UI;
+using UniverseLib.UI.Panels;
+using SaikoNoMod.UI;
 
 namespace SaikoNoMod
 {
-    public class SaikoNoModCore : MelonMod
+    public static class SaikoNoModCore
     {
-        public override void OnInitializeMelon()
+        public static ISaikoNoModLoader? Loader { get; private set; }
+
+        public static void Init(ISaikoNoModLoader loader)
         {
-            _ui = new();
+            if (Loader != null)
+                throw new Exception("SaikoNoMod is already initialized");
+
+            Loader = loader;
+
+            Log($"{BuildInfo.NAME} v{BuildInfo.VERSION} by {BuildInfo.AUTHOR} initializing...");
+
+            // Directory.CreateDirectory(ExplorerFolder);
+            // ConfigManager.Init(Loader.ConfigHandler);
+
+            Universe.Init(0.0f, LateInit, Log, new()
+            {
+                Disable_EventSystem_Override = false,
+                Force_Unlock_Mouse = true,
+                Unhollowed_Modules_Folder = Loader.UnhollowedModulesFolder
+            });
+
+            Loader.Update += OnUpdate;
         }
 
-        public override void OnUpdate()
+        public static void OnUpdate(object sender)
         {
-            if (InputManager.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.F1))
             {
-                if (_ui != null)
+                if (UIManager.UiBase != null)
                 {
-                    _ui.UiBase.Enabled = !_ui.UiBase.Enabled;
+                    UIManager.UiBase.Enabled = !UIManager.UiBase.Enabled;
                 }
             }
         }
 
-        public override void OnLateUpdate()
+        private static void LateInit()
         {
-
+            UIManager.InitUI();
         }
 
-        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
+        #region LOGGING
+
+        public static void Log(object message)
+            => Log(message, LogType.Log);
+
+        public static void LogWarning(object message)
+            => Log(message, LogType.Warning);
+
+        public static void LogError(object message)
+            => Log(message, LogType.Error);
+
+        private static void Log(object message, LogType logType)
         {
-            switch (sceneName)
+            string log = message?.ToString() ?? "";
+
+            switch (logType)
             {
-                case ObjectNames.MainMenuScene:
+                case LogType.Assert:
+                case LogType.Log:
+                    Loader?.OnLogMessage(log);
                     break;
 
-                case ObjectNames.MainLevelScene:
-                    _gameManager = UnityUtils.GetGameManager();
-                    _controlFreak = UnityUtils.GetGameObject(ObjectNames.ControlFreak);
-                    _nightmare = UnityUtils.GetGameObject(ObjectNames.NightmareObject);
-                    _yandereController = UnityUtils.GetYandereController(_nightmare);
+                case LogType.Warning:
+                    Loader?.OnLogWarning(log);
                     break;
 
-                default:
+                case LogType.Error:
+                case LogType.Exception:
+                    Loader?.OnLogError(log);
                     break;
             }
         }
 
-        private UI.UILoader? _ui = null;
-        private HFPS_GameManager? _gameManager = null;
-        private GameObject? _controlFreak = null;
-        private GameObject? _nightmare = null;
-        private YandereController? _yandereController = null;
+        #endregion
+
+
+        // public override void OnSceneWasLoaded(int buildIndex, string sceneName)
+        // {
+        //     switch (sceneName)
+        //     {
+        //         case ObjectNames.MainMenuScene:
+        //             break;
+
+        //         case ObjectNames.MainLevelScene:
+        //             // _gameManager = UnityUtils.GetGameManager();
+        //             _controlFreak = UnityUtils.GetGameObject(ObjectNames.ControlFreak);
+        //             // _nightmare = UnityUtils.GetGameObject(ObjectNames.NightmareObject);
+        //             // _yandereController = UnityUtils.GetYandereController(_nightmare);
+        //             break;
+
+        //         default:
+        //             break;
+        //     }
+        // }
+
+        // private UI.UILoader? _ui = null;
+        // private HFPS_GameManager? _gameManager = null;
+        // private GameObject? _controlFreak = null;
+        // private GameObject? _nightmare = null;
+        // private YandereController? _yandereController = null;
     }
 }

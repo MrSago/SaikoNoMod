@@ -31,12 +31,12 @@ namespace SaikoNoMod
             HFPS_GameManager? manager = null;
             try
             {
-                manager = GameObject.Find(ObjectNames.GameManager)?.GetComponent<HFPS_GameManager>();
+                manager = GameObject.Find(ObjectNames.GAME_MANAGER)?.GetComponent<HFPS_GameManager>();
                 if (manager == null)
                 {
                     MelonLogger.Error(
                         $"Can't find {nameof(HFPS_GameManager)} " +
-                        $"component of {nameof(GameObject)} {ObjectNames.GameManager}!"
+                        $"component of {nameof(GameObject)} {ObjectNames.GAME_MANAGER}!"
                     );
                     return null;
                 }

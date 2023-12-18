@@ -3,14 +3,14 @@ using UnityEngine.UI;
 using UniverseLib;
 using UniverseLib.UI;
 using UniverseLib.UI.Models;
+using UniverseLib.UI.Panels;
+using MelonLoader;
 
 namespace SaikoNoMod.UI
 {
-    public class Panel : UniverseLib.UI.Panels.PanelBase
+    public class MainPanel : PanelBase
     {
-        public Panel(UIBase owner) : base(owner)
-        {
-        }
+        public MainPanel(UIBase owner) : base(owner) { }
 
         public override string Name => "My Panel";
         public override int MinWidth => 100;
@@ -19,20 +19,20 @@ namespace SaikoNoMod.UI
         public override Vector2 DefaultAnchorMax => new(0.75f, 0.75f);
         public override bool CanDragAndResize => true;
 
+        protected override void OnClosePanelClicked()
+        {
+            Owner.Enabled = !Owner.Enabled;
+        }
+
         protected override void ConstructPanelContent()
         {
             Text myText = UIFactory.CreateLabel(ContentRoot, "myText", "Hello world");
             UIFactory.SetLayoutElement(myText.gameObject, minWidth: 200, minHeight: 25);
+            UIFactory.SetLayoutGroup<VerticalLayoutGroup>(myText.gameObject, true, true, true, true, 0, 0, 0, 5, 5, TextAnchor.MiddleLeft);
 
-            // GameObject refreshToggle = UIFactory.CreateToggle(ContentRoot, "Kekis", out Toggle toggle, out Text text);
-            // UIFactory.SetLayoutElement(refreshToggle, flexibleWidth: 9999);
-            // text.font = UniversalUI.ConsoleFont;
-            // text.supportRichText = true;
-            // text.text = "Auto-update (1 second)";
-            // text.alignment = TextAnchor.MiddleLeft;
-            // text.color = Color.white;
-            // text.fontSize = 12;
-            // toggle.isOn = false;
+            Text NameLabel = UIFactory.CreateLabel(UIRoot, "NameLabel", "AHSUDIHASUIDHAUISDHUIASHDUIASHDUIASHD", TextAnchor.MiddleLeft);
+            NameLabel.horizontalOverflow = HorizontalWrapMode.Wrap;
+            UIFactory.SetLayoutElement(NameLabel.gameObject, minHeight: 25, flexibleWidth: 9999, flexibleHeight: 300);
         }
     }
 }

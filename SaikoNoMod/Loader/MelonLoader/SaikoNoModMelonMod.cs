@@ -1,9 +1,6 @@
 // #if ML
-using System;
-using System.IO;
 using MelonLoader;
 using MelonLoader.Utils;
-using SaikoNoMod.Loader;
 
 [assembly: MelonPlatformDomain(MelonPlatformDomainAttribute.CompatibleDomains.IL2CPP)]
 [assembly: MelonInfo(typeof(SaikoNoMod.Loader.MelonLoader.SaikoNoModMelonMod),
@@ -27,13 +24,8 @@ namespace SaikoNoMod.Loader.MelonLoader
 
         // public ConfigHandler ConfigHandler => _configHandler;
         // public MelonLoaderConfigHandler _configHandler;
-        // public event EventHandler Kekis {
-        //     add => MelonHandler.OnUpdate += value;
-        //     remove => MelonHandler.OnUpdate -= value;
-        // }
 
         public event Action<object>? Update;
-
         public override void OnUpdate()
         {
             Update?.Invoke(this);

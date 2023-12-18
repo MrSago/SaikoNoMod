@@ -1,17 +1,10 @@
-
-using UniverseLib;
 using UniverseLib.UI;
-using UniverseLib.UI.Panels;
-using UnityEngine.UI;
-using UnityEngine;
-using UniverseLib.Input;
 using SaikoNoMod.Properties;
 
 namespace SaikoNoMod.UI
 {
     public static class UIManager
     {
-
         internal static UIBase? UiBase { get; private set; }
         internal static MainPanel? Panel { get; private set; }
         public static bool Enabled

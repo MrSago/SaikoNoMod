@@ -1,11 +1,8 @@
-
 using SaikoNoMod.Loader;
-using UnityEngine;
 using SaikoNoMod.Properties;
-using UniverseLib;
-using UniverseLib.UI;
-using UniverseLib.UI.Panels;
 using SaikoNoMod.UI;
+using UniverseLib;
+using UnityEngine;
 
 namespace SaikoNoMod
 {
@@ -16,11 +13,11 @@ namespace SaikoNoMod
         public static void Init(ISaikoNoModLoader loader)
         {
             if (Loader != null)
-                throw new Exception("SaikoNoMod is already initialized");
+                throw new Exception($"{BuildInfo.NAME} is already initialized");
 
             Loader = loader;
 
-            Log($"{BuildInfo.NAME} v{BuildInfo.VERSION} by {BuildInfo.AUTHOR} initializing...");
+            Log($"{BuildInfo.NAME} v{BuildInfo.VERSION} initializing...");
 
             // Directory.CreateDirectory(ExplorerFolder);
             // ConfigManager.Init(Loader.ConfigHandler);

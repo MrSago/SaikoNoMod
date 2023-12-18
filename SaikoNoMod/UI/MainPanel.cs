@@ -4,7 +4,7 @@ using UniverseLib;
 using UniverseLib.UI;
 using UniverseLib.UI.Models;
 using UniverseLib.UI.Panels;
-using MelonLoader;
+using SaikoNoMod.Properties;
 
 namespace SaikoNoMod.UI
 {
@@ -12,17 +12,12 @@ namespace SaikoNoMod.UI
     {
         public MainPanel(UIBase owner) : base(owner) { }
 
-        public override string Name => "My Panel";
+        public override string Name => $"{BuildInfo.NAME} v{BuildInfo.VERSION}";
         public override int MinWidth => 100;
         public override int MinHeight => 200;
         public override Vector2 DefaultAnchorMin => new(0.25f, 0.25f);
         public override Vector2 DefaultAnchorMax => new(0.75f, 0.75f);
         public override bool CanDragAndResize => true;
-
-        protected override void OnClosePanelClicked()
-        {
-            Owner.Enabled = !Owner.Enabled;
-        }
 
         protected override void ConstructPanelContent()
         {
@@ -33,6 +28,11 @@ namespace SaikoNoMod.UI
             Text NameLabel = UIFactory.CreateLabel(UIRoot, "NameLabel", "AHSUDIHASUIDHAUISDHUIASHDUIASHDUIASHD", TextAnchor.MiddleLeft);
             NameLabel.horizontalOverflow = HorizontalWrapMode.Wrap;
             UIFactory.SetLayoutElement(NameLabel.gameObject, minHeight: 25, flexibleWidth: 9999, flexibleHeight: 300);
+        }
+
+        protected override void OnClosePanelClicked()
+        {
+            Owner.Enabled = !Owner.Enabled;
         }
     }
 }

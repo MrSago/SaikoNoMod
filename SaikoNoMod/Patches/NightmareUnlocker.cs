@@ -12,7 +12,8 @@ namespace SaikoNoMod.Patches
         {
             try
             {
-                if (__instance.name != ObjectNames.NIGHTMARE_UNLOCKER_TRIGGER) { return; }
+                if (__instance.name != ObjectNames.NIGHTMARE_UNLOCKER_TRIGGER)
+                    return;
 
                 GameObject? playButtonObject = GameObject.Find(ObjectNames.PLAY_BUTTON);
                 Button? playButton = playButtonObject?.GetComponent<Button>();

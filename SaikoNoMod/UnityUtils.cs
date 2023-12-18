@@ -1,5 +1,4 @@
 using Il2Cpp;
-using MelonLoader;
 using UnityEngine;
 
 namespace SaikoNoMod
@@ -14,14 +13,14 @@ namespace SaikoNoMod
                 gameObject = GameObject.Find(objectName);
                 if (gameObject == null)
                 {
-                    MelonLogger.Error($"Can't find {nameof(GameObject)} {objectName}!");
+                    SaikoNoModCore.LogWarning($"Can't find GameObject {objectName}!");
                     return null;
                 }
-                MelonLogger.Msg($"GameObject {objectName} found!");
+                SaikoNoModCore.Log($"GameObject {objectName} found!");
             }
             catch (Exception ex)
             {
-                MelonLogger.Error(ex);
+                SaikoNoModCore.LogError(ex);
             }
             return gameObject;
         }
@@ -34,18 +33,17 @@ namespace SaikoNoMod
                 manager = GameObject.Find(ObjectNames.GAME_MANAGER)?.GetComponent<HFPS_GameManager>();
                 if (manager == null)
                 {
-                    MelonLogger.Error(
+                    SaikoNoModCore.LogWarning(
                         $"Can't find {nameof(HFPS_GameManager)} " +
-                        $"component of {nameof(GameObject)} {ObjectNames.GAME_MANAGER}!"
+                        $"component of GameObject {ObjectNames.GAME_MANAGER}!"
                     );
                     return null;
                 }
-                MelonLogger.Msg($"GameManager {nameof(HFPS_GameManager)} found!");
-
+                SaikoNoModCore.Log($"GameManager of {nameof(HFPS_GameManager)} {ObjectNames.GAME_MANAGER} found!");
             }
             catch (Exception ex)
             {
-                MelonLogger.Error(ex);
+                SaikoNoModCore.LogError(ex);
             }
             return manager;
         }
@@ -58,17 +56,17 @@ namespace SaikoNoMod
                 controller = yandereObject?.GetComponent<YandereController>();
                 if (controller == null)
                 {
-                    MelonLogger.Error(
+                    SaikoNoModCore.LogWarning(
                         $"Can't find {nameof(YandereController)} " +
-                        $"component of {nameof(GameObject)} {yandereObject?.name}!"
+                        $"component of GameObject {yandereObject?.name}!"
                     );
                     return null;
                 }
-                MelonLogger.Msg($"Controller {nameof(YandereController)} found!");
+                SaikoNoModCore.Log($"Controller {nameof(YandereController)} found!");
             }
             catch (Exception ex)
             {
-                MelonLogger.Error(ex);
+                SaikoNoModCore.LogError(ex);
             }
             return controller;
         }

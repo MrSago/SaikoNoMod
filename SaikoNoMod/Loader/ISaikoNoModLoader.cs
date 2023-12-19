@@ -8,6 +8,8 @@ namespace SaikoNoMod.Loader
         // ConfigHandler ConfigHandler { get; }
 
         event Action<object>? Update;
+        event Action<int, string>? SceneWasLoaded;
+        event Action<int, string>? SceneWasInitialized;
 
         Action<object> OnLogMessage { get; }
         Action<object> OnLogWarning { get; }

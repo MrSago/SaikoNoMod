@@ -5,26 +5,6 @@ namespace SaikoNoMod
 {
     public static class UnityUtils
     {
-        public static GameObject? GetGameObject(string objectName)
-        {
-            GameObject? gameObject = null;
-            try
-            {
-                gameObject = GameObject.Find(objectName);
-                if (gameObject == null)
-                {
-                    SaikoNoModCore.LogWarning($"Can't find GameObject {objectName}!");
-                    return null;
-                }
-                SaikoNoModCore.Log($"GameObject {objectName} found!");
-            }
-            catch (Exception ex)
-            {
-                SaikoNoModCore.LogError(ex);
-            }
-            return gameObject;
-        }
-
         public static HFPS_GameManager? GetGameManager()
         {
             HFPS_GameManager? manager = null;
@@ -69,11 +49,6 @@ namespace SaikoNoMod
                 SaikoNoModCore.LogError(ex);
             }
             return controller;
-        }
-
-        public static void ChangeKeyBind(string keyDescription)
-        {
-
         }
     }
 }

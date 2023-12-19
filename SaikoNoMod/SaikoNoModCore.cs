@@ -30,9 +30,16 @@ namespace SaikoNoMod
             });
 
             Loader.Update += OnUpdate;
+            Loader.SceneWasLoaded += OnSceneWasLoaded;
+            Loader.SceneWasInitialized += OnSceneWasInitialized;
         }
 
-        public static void OnUpdate(object sender)
+        private static void LateInit()
+        {
+            UIManager.InitUI();
+        }
+
+        private static void OnUpdate(object sender)
         {
             if (Input.GetKeyDown(KeyCode.F1))
             {
@@ -43,9 +50,39 @@ namespace SaikoNoMod
             }
         }
 
-        private static void LateInit()
+        private static void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
-            UIManager.InitUI();
+            switch (sceneName)
+            {
+                case ObjectNames.MAIN_MENU_SCENE:
+                    break;
+
+                case ObjectNames.MAIN_LEVEL_SCENE:
+                    // _gameManager = UnityUtils.GetGameManager();
+                    // _controlFreak = UnityUtils.GetGameObject(ObjectNames.ControlFreak);
+                    // _nightmare = UnityUtils.GetGameObject(ObjectNames.NightmareObject);
+                    // _yandereController = UnityUtils.GetYandereController(_nightmare);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private static void OnSceneWasInitialized(int buildIndex, string sceneName)
+        {
+            switch (sceneName)
+            {
+                case ObjectNames.MAIN_MENU_SCENE:
+                    LocalizedMenuHandler.Init();
+                    break;
+
+                case ObjectNames.MAIN_LEVEL_SCENE:
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         #region LOGGING
@@ -65,8 +102,8 @@ namespace SaikoNoMod
 
             switch (logType)
             {
-                case LogType.Assert:
                 case LogType.Log:
+                case LogType.Assert:
                     Loader?.OnLogMessage(log);
                     break;
 
@@ -78,30 +115,14 @@ namespace SaikoNoMod
                 case LogType.Exception:
                     Loader?.OnLogError(log);
                     break;
+
+                default:
+                    break;
             }
         }
 
         #endregion
 
-
-        // public override void OnSceneWasLoaded(int buildIndex, string sceneName)
-        // {
-        //     switch (sceneName)
-        //     {
-        //         case ObjectNames.MainMenuScene:
-        //             break;
-
-        //         case ObjectNames.MainLevelScene:
-        //             // _gameManager = UnityUtils.GetGameManager();
-        //             _controlFreak = UnityUtils.GetGameObject(ObjectNames.ControlFreak);
-        //             // _nightmare = UnityUtils.GetGameObject(ObjectNames.NightmareObject);
-        //             // _yandereController = UnityUtils.GetYandereController(_nightmare);
-        //             break;
-
-        //         default:
-        //             break;
-        //     }
-        // }
 
         // private UI.UILoader? _ui = null;
         // private HFPS_GameManager? _gameManager = null;

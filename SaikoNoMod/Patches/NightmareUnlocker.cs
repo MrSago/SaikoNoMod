@@ -20,11 +20,12 @@ namespace SaikoNoMod.Patches
                 if (playButton == null)
                 {
                     SaikoNoModCore.LogWarning(
-                        $"[{nameof(NightmareUnlocker)}] Can't find {nameof(Button)} " +
-                        $"component of {nameof(GameObject)} {ObjectNames.PLAY_BUTTON}"
+                        $"[{nameof(NightmareUnlocker)}] Can't get {nameof(Button)} " +
+                        $"component of GameObject {ObjectNames.PLAY_BUTTON}"
                     );
                     return;
                 }
+
                 playButton.interactable = true;
 
                 GameObject? playTextObject = playButtonObject?.transform.GetChild(0)?.gameObject;
@@ -33,11 +34,14 @@ namespace SaikoNoMod.Patches
                 {
                     SaikoNoModCore.LogWarning(
                         $"[{nameof(NightmareUnlocker)}] Can't get {nameof(Text)} " +
-                        $"child(0) component of {nameof(GameObject)} {ObjectNames.PLAY_BUTTON}"
+                        $"child(0) component of GameObject {ObjectNames.PLAY_BUTTON}"
                     );
                     return;
                 }
-                playText.text = "Play";
+
+                const int localizedIndex = 1;
+                string localizedString = LocalizedMenuHandler.GetTextAtIndex(localizedIndex).text;
+                playText.text = string.IsNullOrEmpty(localizedString) ? "Play" : localizedString;
 
                 SaikoNoModCore.Log($"[{nameof(NightmareUnlocker)}] Play button for Nightmare mode successfully unlocked!");
             }

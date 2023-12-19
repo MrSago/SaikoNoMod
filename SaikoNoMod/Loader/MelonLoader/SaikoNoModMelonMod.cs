@@ -8,8 +8,8 @@ using MelonLoader.Utils;
     SaikoNoMod.Properties.BuildInfo.AUTHOR, SaikoNoMod.Properties.BuildInfo.DOWNLOADLINK)]
 [assembly: MelonOptionalDependencies("UniverseLib")]
 [assembly: MelonGame("Habupain", "Saiko no sutoka")]
-[assembly: MelonColor(255, 33, 164, 176)]
-[assembly: MelonAuthorColor(255, 196, 21, 169)]
+[assembly: MelonColor(255, 196, 21, 169)]
+[assembly: MelonAuthorColor(255, 33, 164, 176)]
 
 namespace SaikoNoMod.Loader.MelonLoader
 {
@@ -26,10 +26,17 @@ namespace SaikoNoMod.Loader.MelonLoader
         // public MelonLoaderConfigHandler _configHandler;
 
         public event Action<object>? Update;
-        public override void OnUpdate()
-        {
+        public override void OnUpdate() =>
             Update?.Invoke(this);
-        }
+
+        public event Action<int, string>? SceneWasLoaded;
+        public override void OnSceneWasLoaded(int buildIndex, string sceneName) =>
+            SceneWasLoaded?.Invoke(buildIndex, sceneName);
+
+        public event Action<int, string>? SceneWasInitialized;
+        public override void OnSceneWasInitialized(int buildIndex, string sceneName) =>
+            SceneWasInitialized?.Invoke(buildIndex, sceneName);
+
 
         public Action<object> OnLogMessage => MelonLogger.Msg;
         public Action<object> OnLogWarning => MelonLogger.Warning;

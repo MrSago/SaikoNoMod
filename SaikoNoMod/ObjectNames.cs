@@ -11,5 +11,7 @@ namespace SaikoNoMod
 
         public const string NIGHTMARE_UNLOCKER_TRIGGER = "Exit (5)";
         public const string PLAY_BUTTON = "Practice (1)";
+
+        public const string LANGUAGE_MENU = "ChooseLanguage";
     }
 }

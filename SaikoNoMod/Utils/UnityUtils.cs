@@ -1,7 +1,7 @@
 using Il2Cpp;
 using UnityEngine;
 
-namespace SaikoNoMod
+namespace SaikoNoMod.Utils
 {
     public static class UnityUtils
     {

@@ -3,7 +3,7 @@ using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SaikoNoMod
+namespace SaikoNoMod.Utils
 {
     public static class LocalizedMenuHandler
     {

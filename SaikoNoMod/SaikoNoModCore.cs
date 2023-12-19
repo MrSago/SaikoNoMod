@@ -1,8 +1,9 @@
 using SaikoNoMod.Loader;
 using SaikoNoMod.Properties;
 using SaikoNoMod.UI;
-using UniverseLib;
+using SaikoNoMod.Utils;
 using UnityEngine;
+using UniverseLib;
 
 namespace SaikoNoMod
 {

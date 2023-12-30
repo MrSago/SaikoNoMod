@@ -21,18 +21,45 @@ namespace SaikoNoMod.UI
 
         protected override void ConstructPanelContent()
         {
-            Text myText = UIFactory.CreateLabel(ContentRoot, "myText", "Hello world");
-            UIFactory.SetLayoutElement(myText.gameObject, minWidth: 200, minHeight: 25);
-            UIFactory.SetLayoutGroup<VerticalLayoutGroup>(myText.gameObject, true, true, true, true, 0, 0, 0, 5, 5, TextAnchor.MiddleLeft);
+            Text myText = UIFactory.CreateLabel(ContentRoot, "OneHPModeText", "Some text", TextAnchor.MiddleLeft);
 
-            Text NameLabel = UIFactory.CreateLabel(UIRoot, "NameLabel", "AHSUDIHASUIDHAUISDHUIASHDUIASHDUIASHD", TextAnchor.MiddleLeft);
-            NameLabel.horizontalOverflow = HorizontalWrapMode.Wrap;
-            UIFactory.SetLayoutElement(NameLabel.gameObject, minHeight: 25, flexibleWidth: 9999, flexibleHeight: 300);
+            CreateOneHPChallengeToggle();
+
+            CreateStatusBar();
         }
 
         protected override void OnClosePanelClicked()
         {
             Owner.Enabled = !Owner.Enabled;
+        }
+
+        protected Text? StatusBar { get; private set; }
+
+        private void CreateOneHPChallengeToggle()
+        {
+            GameObject checkbox = UIFactory.CreateToggle(ContentRoot, "OneHPChallengeCheckbox", out Toggle toggle, out Text text);
+            text.text = "One HP Challenge";
+            toggle.isOn = false;
+            toggle.onValueChanged.AddListener((value) =>
+            {
+                if (value)
+                {
+                    SaikoNoModCore.Log("One HP Challenge: ON");
+                    // Settings.Default.OneHPMode = true;
+                }
+                else
+                {
+                    SaikoNoModCore.Log("One HP Challenge: OFF");
+                    // Settings.Default.OneHPMode = false;
+                }
+            });
+        }
+
+        private void CreateStatusBar()
+        {
+            StatusBar = UIFactory.CreateLabel(UIRoot, "StatusBar", "Ready!", TextAnchor.MiddleLeft);
+            StatusBar.horizontalOverflow = HorizontalWrapMode.Wrap;
+            UIFactory.SetLayoutElement(StatusBar.gameObject, minHeight: 25, flexibleWidth: 9999, flexibleHeight: 200);
         }
     }
 }

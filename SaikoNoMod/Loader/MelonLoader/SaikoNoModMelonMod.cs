@@ -37,7 +37,6 @@ namespace SaikoNoMod.Loader.MelonLoader
         public override void OnSceneWasInitialized(int buildIndex, string sceneName) =>
             SceneWasInitialized?.Invoke(buildIndex, sceneName);
 
-
         public Action<object> OnLogMessage => MelonLogger.Msg;
         public Action<object> OnLogWarning => MelonLogger.Warning;
         public Action<object> OnLogError => MelonLogger.Error;

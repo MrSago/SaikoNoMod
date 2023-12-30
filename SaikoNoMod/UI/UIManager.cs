@@ -19,7 +19,7 @@ namespace SaikoNoMod.UI
             }
         }
 
-        public static void InitUI()
+        public static void Init()
         {
             UiBase = UniversalUI.RegisterUI(BuildInfo.GUID, null);
             Panel = new(UiBase);

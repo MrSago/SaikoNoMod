@@ -37,7 +37,7 @@ namespace SaikoNoMod
 
         private static void LateInit()
         {
-            UIManager.InitUI();
+            UIManager.Init();
         }
 
         private static void OnUpdate(object sender)

@@ -10,11 +10,22 @@ namespace SaikoNoMod.Utils
         public static void Init()
         {
             if (_textFields != null)
+            {
+                SaikoNoModCore.LogWarning(
+                    $"[{nameof(LocalizedMenuHandler)}] Localized Menu is already initialized!"
+                );
                 return;
+            }
 
             LanguageMenu? menu = GetLanguageMenu();
             if (menu == null)
+            {
+                SaikoNoModCore.LogWarning(
+                    $"[{nameof(LocalizedMenuHandler)}] Can't get {nameof(LanguageMenu)} " +
+                    $"component of GameObject {ObjectNames.LANGUAGE_MENU}!"
+                );
                 return;
+            }
 
             _textFields = menu.textFields;
             SaikoNoModCore.Log(
@@ -22,14 +33,14 @@ namespace SaikoNoMod.Utils
             );
         }
 
-        public static Text GetTextAtIndex(int index)
+        public static Text? GetTextAtIndex(int index)
         {
             if (_textFields == null)
             {
                 SaikoNoModCore.LogWarning(
                     $"[{nameof(LocalizedMenuHandler)}] {nameof(_textFields)} is not initialized!"
                 );
-                return new();
+                return null;
             }
 
             if (index < 0 || index >= _textFields.Length)
@@ -37,7 +48,7 @@ namespace SaikoNoMod.Utils
                 SaikoNoModCore.LogWarning(
                     $"[{nameof(LocalizedMenuHandler)}] Index {index} is out of range: [0; {_textFields.Length - 1}]!"
                 );
-                return new();
+                return null;
             }
 
             return _textFields[index];
@@ -51,14 +62,6 @@ namespace SaikoNoMod.Utils
             try
             {
                 menu = GameObject.Find(ObjectNames.LANGUAGE_MENU)?.GetComponent<LanguageMenu>();
-                if (menu == null)
-                {
-                    SaikoNoModCore.LogWarning(
-                        $"[{nameof(LocalizedMenuHandler)}] Can't get {nameof(LanguageMenu)} " +
-                        $"component of GameObject {ObjectNames.LANGUAGE_MENU}!"
-                    );
-                    return null;
-                }
             }
             catch (Exception ex)
             {

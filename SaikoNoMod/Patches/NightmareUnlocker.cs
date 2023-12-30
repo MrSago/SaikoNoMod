@@ -13,7 +13,7 @@ namespace SaikoNoMod.Patches
         {
             try
             {
-                if (__instance.name != ObjectNames.NIGHTMARE_UNLOCKER_TRIGGER)
+                if (__instance.name != ObjectNames.NIGHTMARE_UNLOCKER_INSTANCE)
                     return;
 
                 GameObject? playButtonObject = GameObject.Find(ObjectNames.PLAY_BUTTON);
@@ -41,7 +41,7 @@ namespace SaikoNoMod.Patches
                 }
 
                 const int localizedIndex = 1;
-                string localizedString = LocalizedMenuHandler.GetTextAtIndex(localizedIndex).text;
+                string? localizedString = LocalizedMenuHandler.GetTextAtIndex(localizedIndex)?.text;
                 playText.text = string.IsNullOrEmpty(localizedString) ? "Play" : localizedString;
 
                 SaikoNoModCore.Log($"[{nameof(NightmareUnlocker)}] Play button for Nightmare mode successfully unlocked!");

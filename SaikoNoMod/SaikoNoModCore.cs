@@ -37,7 +37,11 @@ namespace SaikoNoMod
 
         private static void LateInit()
         {
+            Log("Loading UI...");
+
             UIManager.Init();
+
+            Log($"{BuildInfo.NAME} v{BuildInfo.VERSION} initialized!");
         }
 
         private static void OnUpdate(object sender)

@@ -1,6 +1,6 @@
-// #if ML
 using MelonLoader;
 using MelonLoader.Utils;
+using SaikoNoMod.Config;
 
 [assembly: MelonPlatformDomain(MelonPlatformDomainAttribute.CompatibleDomains.IL2CPP)]
 [assembly: MelonInfo(typeof(SaikoNoMod.Loader.MelonLoader.SaikoNoModMelonMod),
@@ -22,8 +22,8 @@ namespace SaikoNoMod.Loader.MelonLoader
             Path.Combine("MelonLoader", "Il2CppAssemblies")
         );
 
-        // public ConfigHandler ConfigHandler => _configHandler;
-        // public MelonLoaderConfigHandler _configHandler;
+        public ConfigHandler ConfigHandler => _configHandler;
+        public MelonLoaderConfigHandler _configHandler = null!;
 
         public event Action<object>? Update;
         public override void OnUpdate() =>
@@ -43,9 +43,8 @@ namespace SaikoNoMod.Loader.MelonLoader
 
         public override void OnLateInitializeMelon()
         {
-            // _configHandler = new MelonLoaderConfigHandler();
+            _configHandler = new MelonLoaderConfigHandler();
             SaikoNoModCore.Init(this);
         }
     }
 }
-// #endif

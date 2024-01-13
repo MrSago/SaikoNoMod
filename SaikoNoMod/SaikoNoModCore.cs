@@ -1,3 +1,4 @@
+using SaikoNoMod.Config;
 using SaikoNoMod.Loader;
 using SaikoNoMod.Properties;
 using SaikoNoMod.UI;
@@ -9,7 +10,7 @@ namespace SaikoNoMod
 {
     public static class SaikoNoModCore
     {
-        public static ISaikoNoModLoader? Loader { get; private set; }
+        public static ISaikoNoModLoader Loader { get; private set; } = null!;
 
         public static void Init(ISaikoNoModLoader loader)
         {
@@ -20,13 +21,12 @@ namespace SaikoNoMod
 
             Log($"{BuildInfo.NAME} v{BuildInfo.VERSION} initializing...");
 
-            // Directory.CreateDirectory(ExplorerFolder);
-            // ConfigManager.Init(Loader.ConfigHandler);
+            ConfigManager.Init(Loader.ConfigHandler);
 
             Universe.Init(0.0f, LateInit, Log, new()
             {
-                Disable_EventSystem_Override = false,
-                Force_Unlock_Mouse = true,
+                Disable_EventSystem_Override = ConfigManager.DisableEventSystemOverride.Value,
+                Force_Unlock_Mouse = ConfigManager.ForceUnlockMouse.Value,
                 Unhollowed_Modules_Folder = Loader.UnhollowedModulesFolder
             });
 
@@ -109,16 +109,16 @@ namespace SaikoNoMod
             {
                 case LogType.Log:
                 case LogType.Assert:
-                    Loader?.OnLogMessage(log);
+                    Loader.OnLogMessage(log);
                     break;
 
                 case LogType.Warning:
-                    Loader?.OnLogWarning(log);
+                    Loader.OnLogWarning(log);
                     break;
 
                 case LogType.Error:
                 case LogType.Exception:
-                    Loader?.OnLogError(log);
+                    Loader.OnLogError(log);
                     break;
 
                 default:

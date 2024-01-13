@@ -20,7 +20,7 @@ namespace SaikoNoMod.Config
         public Action<T>? OnValueChanged;
         public Action? OnValueChangedNotify { get; set; }
 
-        public ConfigHandler Handler => ConfigManager.Handler;
+        public ConfigHandler Handler => ConfigManager.Handler!;
 
         public ConfigElement(string name, string description, T defaultValue)
         {

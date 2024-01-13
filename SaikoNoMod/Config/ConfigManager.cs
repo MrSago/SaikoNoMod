@@ -4,12 +4,12 @@ namespace SaikoNoMod.Config
     {
         internal static readonly Dictionary<string, IConfigElement> ConfigElements = new();
 
-        public static ConfigHandler Handler { get; private set; }
+        public static ConfigHandler Handler { get; private set; } = null!;
 
-        public static ConfigElement<float> StartupDelayTime;
-        public static ConfigElement<bool> DisableEventSystemOverride;
-        public static ConfigElement<bool> ForceUnlockMouse;
-        public static ConfigElement<bool> OneHPChallange;
+        public static ConfigElement<float> StartupDelayTime { get; private set; } = null!;
+        public static ConfigElement<bool> DisableEventSystemOverride { get; private set; } = null!;
+        public static ConfigElement<bool> ForceUnlockMouse { get; private set; } = null!;
+        public static ConfigElement<bool> OneHPChallange { get; private set; } = null!;
 
         public static void Init(ConfigHandler handler)
         {

@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniverseLib;
 using UniverseLib.UI;
-using UniverseLib.UI.Models;
 using UniverseLib.UI.Panels;
 using SaikoNoMod.Properties;
+using SaikoNoMod.Config;
 
 namespace SaikoNoMod.UI
 {
@@ -33,24 +33,24 @@ namespace SaikoNoMod.UI
             Owner.Enabled = !Owner.Enabled;
         }
 
-        protected Text? StatusBar { get; private set; }
+        protected Text StatusBar { get; private set; } = null!;
 
         private void CreateOneHPChallengeToggle()
         {
             GameObject checkbox = UIFactory.CreateToggle(ContentRoot, "OneHPChallengeCheckbox", out Toggle toggle, out Text text);
             text.text = "One HP Challenge";
-            toggle.isOn = false;
+            toggle.isOn = ConfigManager.OneHPChallange.Value;
             toggle.onValueChanged.AddListener((value) =>
             {
                 if (value)
                 {
                     SaikoNoModCore.Log("One HP Challenge: ON");
-                    // Settings.Default.OneHPMode = true;
+                    ConfigManager.OneHPChallange.Value = true;
                 }
                 else
                 {
                     SaikoNoModCore.Log("One HP Challenge: OFF");
-                    // Settings.Default.OneHPMode = false;
+                    ConfigManager.OneHPChallange.Value = false;
                 }
             });
         }

@@ -7,6 +7,8 @@ namespace SaikoNoMod.Utils
 {
     public static class LocalizedMenuHandler
     {
+        private static Il2CppReferenceArray<Text>? _textFields = null;
+
         public static void Init()
         {
             if (_textFields != null)
@@ -54,11 +56,10 @@ namespace SaikoNoMod.Utils
             return _textFields[index];
         }
 
-        private static Il2CppReferenceArray<Text>? _textFields = null;
-
         private static LanguageMenu? GetLanguageMenu()
         {
             LanguageMenu? menu = null;
+
             try
             {
                 menu = GameObject.Find(ObjectNames.LANGUAGE_MENU)?.GetComponent<LanguageMenu>();
@@ -67,6 +68,7 @@ namespace SaikoNoMod.Utils
             {
                 SaikoNoModCore.LogError(ex);
             }
+
             return menu;
         }
     }

@@ -1,3 +1,5 @@
+using SaikoNoMod.Config;
+
 namespace SaikoNoMod.Loader
 {
     public interface ISaikoNoModLoader
@@ -5,7 +7,7 @@ namespace SaikoNoMod.Loader
         string SaikoNoModFolderDestination { get; }
         string UnhollowedModulesFolder { get; }
 
-        // ConfigHandler ConfigHandler { get; }
+        ConfigHandler ConfigHandler { get; }
 
         event Action<object>? Update;
         event Action<int, string>? SceneWasLoaded;

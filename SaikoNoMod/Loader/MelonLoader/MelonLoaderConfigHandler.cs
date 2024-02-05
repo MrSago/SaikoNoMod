@@ -41,7 +41,7 @@ namespace SaikoNoMod.Loader.MelonLoader
                 var thisMethod = GetType().GetMethod("OnChanged");
                 if (evt == null || evt.EventHandlerType == null || thisMethod == null)
                     return;
-                    
+
                 evt.AddEventHandler(entry, Delegate.CreateDelegate(evt.EventHandlerType, this, thisMethod));
             }
 

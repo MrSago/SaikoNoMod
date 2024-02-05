@@ -11,15 +11,6 @@ namespace SaikoNoMod.Utils
             try
             {
                 manager = GameObject.Find(ObjectNames.GAME_MANAGER)?.GetComponent<HFPS_GameManager>();
-                if (manager == null)
-                {
-                    SaikoNoModCore.LogWarning(
-                        $"Can't find {nameof(HFPS_GameManager)} " +
-                        $"component of GameObject {ObjectNames.GAME_MANAGER}!"
-                    );
-                    return null;
-                }
-                SaikoNoModCore.Log($"GameManager of {nameof(HFPS_GameManager)} {ObjectNames.GAME_MANAGER} found!");
             }
             catch (Exception ex)
             {

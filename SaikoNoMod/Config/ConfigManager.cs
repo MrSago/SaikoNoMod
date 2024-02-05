@@ -40,10 +40,6 @@ namespace SaikoNoMod.Config
             ForceUnlockMouse = new("ForceUnlockMouse",
                 "Force unlock mouse",
                 true);
-
-            OneHPChallange = new("OneHPChallange",
-                "One HP Challenge",
-                false);
         }
     }
 }

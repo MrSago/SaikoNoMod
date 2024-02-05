@@ -1,5 +1,6 @@
 using SaikoNoMod.Config;
 using SaikoNoMod.Loader;
+using SaikoNoMod.Mods;
 using SaikoNoMod.Properties;
 using SaikoNoMod.UI;
 using SaikoNoMod.Utils;
@@ -33,6 +34,8 @@ namespace SaikoNoMod
             Loader.Update += OnUpdate;
             Loader.SceneWasLoaded += OnSceneWasLoaded;
             Loader.SceneWasInitialized += OnSceneWasInitialized;
+
+            OneHPChallenge.Init();
         }
 
         private static void LateInit()
@@ -63,10 +66,6 @@ namespace SaikoNoMod
                     break;
 
                 case ObjectNames.MAIN_LEVEL_SCENE:
-                    // _gameManager = UnityUtils.GetGameManager();
-                    // _controlFreak = UnityUtils.GetGameObject(ObjectNames.ControlFreak);
-                    // _nightmare = UnityUtils.GetGameObject(ObjectNames.NightmareObject);
-                    // _yandereController = UnityUtils.GetYandereController(_nightmare);
                     break;
 
                 default:
@@ -127,12 +126,5 @@ namespace SaikoNoMod
         }
 
         #endregion
-
-
-        // private UI.UILoader? _ui = null;
-        // private HFPS_GameManager? _gameManager = null;
-        // private GameObject? _controlFreak = null;
-        // private GameObject? _nightmare = null;
-        // private YandereController? _yandereController = null;
     }
 }
